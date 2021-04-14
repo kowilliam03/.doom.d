@@ -25,7 +25,9 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-one)
+(setq doom-theme 'doom-one
+      doom-font (font-spec :family "hack" :size 22)
+      )
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -56,3 +58,40 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
+;; Default Emacs Frame size
+;; (add-to-list 'default-frame-alist '(height . 1080))
+;; (add-to-list 'default-frame-alist '(weight . 1920))
+
+(setq-default
+ delete-by-moving-to-trash t
+ window-combination-resize t
+ x-stretch-cursor t)
+
+(setq doom-line-numbers-style 'relative)
+
+(setq undo-limit 80000000
+      evil-want-fine-undo t
+      auto-save-default t
+      truncate-string-ellipsis "…")
+
+(global-subword-mode 1)
+
+(after! company
+
+  (setq company-idle-delay 0.2
+        company-minimum-prefix-length 2
+        )
+  (add-hook 'evil-normal-state-entry-hook #'company-abort)
+  )
+
+(after! lsp
+  (setq lsp-ui-sideline-enable nil
+        lsp-enable-symbol-highlighting nil
+        lsp-ui-doc-position 'bottom
+      )
+  )
+
+(use-package! info-colors
+  :commands (info-colors-fontify-node))
+(add-hook 'Info-selection-hook 'info-colors-fontify-node)
+(add-hook 'Info-mode-hook #'mixed-pitch-mode)

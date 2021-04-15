@@ -77,12 +77,15 @@
 (global-subword-mode 1)
 
 (after! company
-
   (setq company-idle-delay 0.2
         company-minimum-prefix-length 2
         )
   (add-hook 'evil-normal-state-entry-hook #'company-abort)
   )
+
+(after! company-box
+  (setq company-box-doc-enable nil))
+
 
 (after! lsp
   (setq lsp-ui-sideline-enable nil

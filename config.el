@@ -25,9 +25,22 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-one
-      doom-font (font-spec :family "hack" :size 22)
+(setq doom-theme 'doom-solarized-light
       )
+
+(pcase system-type
+  ((or 'gnu/linux 'windows-nt )
+   (set-face-attribute 'default nil
+                       ;; :font "JetBrains Mono"
+                       :font "Iosevka"
+                       :weight 'regular
+                       )))
+
+(set-face-attribute 'fixed-pitch nil
+                    :font "Iosevka"
+                    :weight 'light
+                    )
+
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -90,7 +103,7 @@
 (after! lsp
   (setq lsp-ui-sideline-enable nil
         lsp-enable-symbol-highlighting nil
-        lsp-ui-doc-position 'bottom
+        lsp-ui-doc-enable nil
       )
   )
 
